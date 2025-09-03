@@ -1,7 +1,7 @@
 import javax.swing.*;
 
+import framemanagement.AnimationPlayer;
 import framemanagement.FrameManager;
-import framemanagement.tickables.AnimationPlayer;
 
 public class Main {
     public static void main(String[] args) {

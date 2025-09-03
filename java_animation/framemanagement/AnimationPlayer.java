@@ -1,8 +1,7 @@
-package framemanagement.tickables;
+package framemanagement;
 
 import javax.swing.*;
 import java.awt.*;
-import framemanagement.FrameManager;
 
 public class AnimationPlayer extends JPanel implements FrameManager.UpdateListener {
     private volatile double x, y; // position
