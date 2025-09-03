@@ -1,31 +1,55 @@
 package framemanagement.tickables;
 
-import framemanagement.Tickable;
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Graphics;
+import javax.swing.*;
+import java.awt.*;
+import framemanagement.FrameManager;
 
-public class AnimationPlayer extends JPanel implements Tickable {
-    private int tickCounter = 0;
+public class AnimationPlayer extends JPanel implements FrameManager.UpdateListener {
+    private volatile double x, y; // position
+    private volatile double vx, vy; // velocity
+    private final int size = 50; // square side
 
-    public AnimationPlayer() {
-        this.setBounds(0, 0, 100, 200);
+    public AnimationPlayer(double startX, double startY, double velX, double velY) {
+        this.x = startX;
+        this.y = startY;
+        this.vx = velX;
+        this.vy = velY;
+
+        setPreferredSize(new Dimension(400, 300));
+        setDoubleBuffered(true);
+        setBackground(Color.WHITE);
     }
 
     @Override
-    public void tick() {
-        tickCounter++;
+    public void onUpdate(double dt) {
+        x += vx * dt;
+        y += vy * dt;
+
+        int w = getWidth(), h = getHeight();
+
+        // Bounce horizontally
+        if (x < 0) {
+            x = 0;
+            vx = -vx;
+        } else if (x + size > w) {
+            x = w - size;
+            vx = -vx;
+        }
+
+        // Bounce vertically
+        if (y < 0) {
+            y = 0;
+            vy = -vy;
+        } else if (y + size > h) {
+            y = h - size;
+            vy = -vy;
+        }
     }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); // Always call super.paintComponent()
-
-        // Example drawing:
+        super.paintComponent(g);
         g.setColor(Color.BLUE);
-        g.fillRect(50, 50, 100, 80); // Draw a filled rectangle
-        g.setColor(Color.RED);
-        g.drawOval(180, 50, 70, 70); // Draw an oval outline
-        g.drawString(Integer.toString(this.tickCounter), 100, 200); // Draw text
+        g.fillRect((int) x, (int) y, size, size);
     }
 }
