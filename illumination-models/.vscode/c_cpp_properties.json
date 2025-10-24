@@ -3,9 +3,11 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/include/**"
             ],
             "defines": [
+                "GLEW_STATIC",
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
