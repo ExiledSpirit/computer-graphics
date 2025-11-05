@@ -10,10 +10,14 @@ public:
 
     // Member function declarations
     std::string getFilePath() const;
+    int getWidth() const;
+    int getHeight() const;
 
     void fetchImage();
 private:
     std::string filePath;
+    int width;
+    int height;
     int** pixels;
 };
 
