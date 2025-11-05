@@ -16,9 +16,12 @@ public:
     void fetchImage();
 private:
     std::string filePath;
-    int width;
-    int height;
-    int** pixels;
+    int width = 0;
+    int height = 0;
+    int grey = 0;
+    int** pixels = NULL;
+
+    void writePixels(const std::stringstream& ss, const int width, const int height);
 };
 
 #endif // IMAGE_H
